@@ -140,11 +140,54 @@ public class Algoritmos {
             }
         }
         
+        arestas = g.obterTodosOsArcos();
+        for(Arco aresta : arestas){
+            Vertice origem = aresta.getOrigem();
+            Vertice destino = aresta.getDestino();
+            destino.adicionarArco(origem, aresta.getPeso());
+        }
         
         try {
             g.gravarArquivo(new File("novografo.grf"));
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage(), "Erro!", JOptionPane.ERROR_MESSAGE);
         }
+    }
+    
+    public static ArrayList<Vertice> algoritimoDijkstra(Grafo g, Vertice inicio){
+        ArrayList<Vertice> resultado = new ArrayList<>();
+        for (Vertice vertice : g.obterVertices()) {
+            vertice.zerarDistancia();
+            vertice.setCaminho("");
+        }
+        inicio.definirDistancia(0);
+        ArrayList<Vertice> filaDePrioridade = new ArrayList<>();
+        
+        for(Vertice v : g.obterVertices()){
+            filaDePrioridade.add(v);
+        }
+        
+        
+        while(!filaDePrioridade.isEmpty()){
+            Vertice u = null;
+            double menorDistancia = Double.POSITIVE_INFINITY;
+            int indiceMenorDistancia = -1;
+            for(int x = 0; x < filaDePrioridade.size(); x++){
+                if(filaDePrioridade.get(x).obterDistancia() < menorDistancia){
+                    menorDistancia = filaDePrioridade.get(x).obterDistancia();
+                    indiceMenorDistancia = x;
+                }
+            }
+            u = filaDePrioridade.remove(indiceMenorDistancia);
+            resultado.add(u);
+            for(Arco arco : u.obterArcos()){
+                Vertice v = arco.getDestino();
+                if(v.obterDistancia() > u.obterDistancia() + arco.getPeso()){
+                    v.definirDistancia(u.obterDistancia() + arco.getPeso());
+                    v.setCaminho(u.getCaminho());
+                }
+            }
+        }
+        return resultado;
     }
 }

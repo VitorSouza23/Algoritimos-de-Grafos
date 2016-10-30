@@ -21,7 +21,7 @@ public class Vertice {
     //Rótulo do vértice: serve para identificação
     private final String rotulo;
     
-//Os dois próximos atributos são utilizados pelos algoritmos de grafos.
+//Os quatro próximos atributos são utilizados pelos algoritmos de grafos.
     
     //Quando o valor de visitado for 0 (zero) significa que o vértice ainda
     //não foi visitado pelo algoritmo. Em cada nova visita o método deve invocar
@@ -34,6 +34,19 @@ public class Vertice {
     //temporariamente distâncias nas iterações dos algoritmos. Os métodos
     //definirDistancia(), zerarDistancia() e obterDistancia() devem ser usados.
     private double distancia = Double.POSITIVE_INFINITY;
+    
+    
+    //Algoritmos de caminhos podem precisar da informação de qual caminho foi
+    //utilizado para se obter a distância informada. O caminho é uma String
+    //Contendo os rótulos dos vértices utilizados para chegar até o vértice
+    private String caminho = "";
+
+    //Algoritmos de árvores geradoras mínimas podem precisar diferenciar a árvore
+    //da qual cada vértice do grafo faz parte, durante a execução, para detectar
+    //ciclos.
+    private int nArvore;
+
+    
     
     public Vertice(String rotulo) {
         this.rotulo = rotulo;
@@ -103,8 +116,6 @@ public class Vertice {
         return this.distancia;
     }
     
-    private int nArvore;
-
     public int getnArvore() {
         return nArvore;
     }
@@ -112,14 +123,12 @@ public class Vertice {
     public void setnArvore(int nArvore) {
         this.nArvore = nArvore;
     }
-    
-    /*public void ordenaArcos() {
-        for (int i = 0; i < arcos.size() - 1; i++) {
-            for (int j = i + 1; j < arcos.size(); j++) {
-                if (arcos.get(i).getPeso() > arcos.get(j).getPeso()) {
-                    Collections.swap(arcos, i, j);
-                }
-            }
-        }
-    }*/
+
+    public String getCaminho() {
+        return caminho + " - " + this.rotulo;
+    }
+
+    public void setCaminho(String caminho) {
+        this.caminho = caminho;
+    }
 }
