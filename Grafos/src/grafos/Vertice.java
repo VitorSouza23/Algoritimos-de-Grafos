@@ -1,6 +1,6 @@
 /*
-    Arquivo versão 2.0
-    Contempla o uso de buscas e árvores mínimas geradoras
+    Arquivo versão 4.0
+    Contempla o uso de buscas, árvores geradoras mínimas, caminho mínimo e fluxo máximo.
 */
 
 package grafos;
@@ -131,4 +131,30 @@ public class Vertice {
     public void setCaminho(String caminho) {
         this.caminho = caminho;
     }
+    
+    
+    private ArrayList<Arco> caminhoLista;
+
+    /**
+     * Get the value of caminhoLista
+     *
+     * @return the value of caminhoLista
+     */
+    public ArrayList<Arco> getCaminhoLista() {
+        return new ArrayList(this.caminhoLista);
+    }
+
+    /**
+     * Set the value of caminhoLista
+     *
+     * @param caminhoLista new value of caminhoLista
+     */
+    public void setCaminhoLista(ArrayList<Arco> caminhoLista) {
+        if (caminhoLista == null) {
+            this.caminhoLista = new ArrayList();
+        } else {
+            this.caminhoLista = new ArrayList(caminhoLista);
+        }
+    }
+
 }

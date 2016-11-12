@@ -173,7 +173,7 @@ public class Algoritmos {
             double menorDistancia = Double.POSITIVE_INFINITY;
             int indiceMenorDistancia = -1;
             for(int x = 0; x < filaDePrioridade.size(); x++){
-                if(filaDePrioridade.get(x).obterDistancia() < menorDistancia){
+                if(filaDePrioridade.get(x).obterDistancia() <= menorDistancia){
                     menorDistancia = filaDePrioridade.get(x).obterDistancia();
                     indiceMenorDistancia = x;
                 }
@@ -190,4 +190,79 @@ public class Algoritmos {
         }
         return resultado;
     }
+    
+    private static boolean buscaResidual(Grafo g, Vertice inicio, Vertice fim) {
+        
+        double fluxo = Double.MAX_VALUE;
+        ArrayList<Arco> listaArco = new ArrayList<>();
+        
+        inicio.visitar();
+        Queue<Vertice> fila = new LinkedList<>();
+        fila.add(inicio);
+        while (!fila.isEmpty()) {
+            Vertice u = fila.remove();
+            for (Arco arco : u.obterArcos()) {
+                if(u.equals(inicio)){
+                    fluxo = arco.getPeso();
+                }
+                Vertice adj = arco.getDestino();
+                if (adj.obterVisitado() == 0 && fluxo > 0) {
+                    if(fluxo > arco.getPeso()){
+                        if(arco.getFluxo() < arco.getPeso()){
+                            arco.setFluxo(fluxo);
+                            fluxo -= arco.getPeso();
+                        }else{
+                            return false;
+                        }
+                        
+                    }else if(fluxo < arco.getPeso()){
+                        if((fluxo + arco.getFluxo()) <= arco.getPeso()){
+                            arco.setFluxo(arco.getFluxo() + fluxo);
+                        }else{
+                            arco.setFluxo(arco.getPeso());
+                            fluxo -= arco.getPeso();
+                        }
+                        
+                    }
+                    adj.visitar();
+                    listaArco.add(arco);
+                    fila.add(adj);
+                    if(adj.equals(fim)){
+                        adj.setCaminhoLista(listaArco);
+                        return true;
+                    }
+                }
+            }
+            u.visitar();
+        }
+
+        return false;
+    }
+    
+    public static double fluxoMaximo(Grafo g, Vertice inicio, Vertice fim){
+        double fluxoMaximo = 0;
+        for(Arco arco : g.obterTodosOsArcos()){
+            arco.setFluxo(0);
+        }
+        for (Vertice vertice : g.obterVertices()) {
+            vertice.zerarVisitas();
+            vertice.setCaminhoLista(null);
+        }
+        System.out.println("De " + inicio.toString() + " Para: " + fim.toString());
+        System.out.println("=============================================");
+        while(buscaResidual(g, inicio, fim)){
+            double max = Double.MAX_VALUE;
+            for(Arco arco : fim.getCaminhoLista()){
+                max = max > arco.getFluxo()? arco.getFluxo():max;
+                System.out.println("Origem: " + arco.getOrigem() + " Destino: " + arco.getDestino() + " Fluxo: " + arco.getPeso()
+                        + "/" + arco.getFluxo());
+            }
+            fluxoMaximo += max;
+        }
+        System.out.println("=============================================");
+        System.out.println("Fluxo Máximo: " + fluxoMaximo);
+        return fluxoMaximo;
+    }
+    
+    
 }

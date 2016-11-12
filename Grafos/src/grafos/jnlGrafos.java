@@ -55,6 +55,7 @@ public class jnlGrafos extends javax.swing.JFrame {
         brPrinfundidadeRecursiva = new javax.swing.JButton();
         btArvoregeradoraMinima = new javax.swing.JButton();
         btDijkstra = new javax.swing.JButton();
+        btFluxoMaximo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Playground de Grafos");
@@ -157,6 +158,13 @@ public class jnlGrafos extends javax.swing.JFrame {
             }
         });
 
+        btFluxoMaximo.setText("Fluxo Máximo >>");
+        btFluxoMaximo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btFluxoMaximoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -173,7 +181,8 @@ public class jnlGrafos extends javax.swing.JFrame {
                     .addComponent(btBuscaProfundidade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(brPrinfundidadeRecursiva, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btArvoregeradoraMinima, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btDijkstra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btDijkstra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btFluxoMaximo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -203,6 +212,8 @@ public class jnlGrafos extends javax.swing.JFrame {
                         .addComponent(btArvoregeradoraMinima)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btDijkstra)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btFluxoMaximo)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jScrollPane2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -320,6 +331,22 @@ public class jnlGrafos extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btDijkstraActionPerformed
 
+    private void btFluxoMaximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFluxoMaximoActionPerformed
+        if (jList.getSelectedValue() != null) {
+            Vertice selecionado = (Vertice)jList.getSelectedValue();
+            ArrayList<Vertice> opcoes = Algoritmos.percorreLargura(grafo, selecionado);
+            Vertice fim = (Vertice) JOptionPane.showInputDialog(this, "Escolha um vértice de Fim:", "Vértice Fim", 
+                    JOptionPane.OK_CANCEL_OPTION,null , opcoes.toArray(), opcoes.toArray()[1]);
+            if(fim != null){
+                double fluxoMaximo = Algoritmos.fluxoMaximo(grafo, selecionado, fim);
+                JOptionPane.showMessageDialog(this, "Fluxo Máximo: " + fluxoMaximo, "Fluxo Máximo", JOptionPane.INFORMATION_MESSAGE);
+                
+            }else{
+                JOptionPane.showMessageDialog(this, "Erro!", "!@#$", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_btFluxoMaximoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -363,6 +390,7 @@ public class jnlGrafos extends javax.swing.JFrame {
     private javax.swing.JButton btBuscaLargura;
     private javax.swing.JButton btBuscaProfundidade;
     private javax.swing.JButton btDijkstra;
+    private javax.swing.JButton btFluxoMaximo;
     private javax.swing.JButton btnArcos;
     private javax.swing.JButton btnCarregar;
     private javax.swing.JButton btnSalvar;

@@ -1,6 +1,6 @@
 /*
-    Arquivo versão 2.0
-    Contempla o uso de buscas e árvores mínimas geradoras
+    Arquivo versão 4.0
+    Contempla o uso de buscas, árvores geradoras mínimas, caminho mínimo e fluxo máximo.
 */
 
 package grafos;

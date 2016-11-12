@@ -39,6 +39,7 @@
                   <Component id="brPrinfundidadeRecursiva" max="32767" attributes="0"/>
                   <Component id="btArvoregeradoraMinima" max="32767" attributes="0"/>
                   <Component id="btDijkstra" max="32767" attributes="0"/>
+                  <Component id="btFluxoMaximo" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -73,6 +74,8 @@
                       <Component id="btArvoregeradoraMinima" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btDijkstra" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btFluxoMaximo" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
                   <Component id="jScrollPane2" alignment="0" max="32767" attributes="0"/>
@@ -237,6 +240,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btDijkstraActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btFluxoMaximo">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Fluxo M&#xe1;ximo &gt;&gt;"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btFluxoMaximoActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

@@ -1,6 +1,6 @@
 /*
-    Arquivo versão 2.0
-    Contempla o uso de buscas e árvores mínimas geradoras
+    Arquivo versão 4.0
+    Contempla o uso de buscas, árvores geradoras mínimas, caminho mínimo e fluxo máximo.
 */
 
 package grafos;
@@ -54,4 +54,25 @@ public class Arco implements Comparable<Arco>{
         }
         return 0;
     }
+    
+        private double fluxo = 0;
+
+    /**
+     * Obter o valor de fluxo
+     *
+     * @return the value of fluxo
+     */
+    public double getFluxo() {
+        return fluxo;
+    }
+
+    /**
+     * Definir o valor de fluxo
+     *
+     * @param fluxo new value of fluxo
+     */
+    public void setFluxo(double fluxo) {
+        this.fluxo = fluxo;
+    }
+
 }
