@@ -336,13 +336,13 @@ public class jnlGrafos extends javax.swing.JFrame {
             Vertice selecionado = (Vertice)jList.getSelectedValue();
             ArrayList<Vertice> opcoes = Algoritmos.percorreLargura(grafo, selecionado);
             Vertice fim = (Vertice) JOptionPane.showInputDialog(this, "Escolha um vértice de Fim:", "Vértice Fim", 
-                    JOptionPane.OK_CANCEL_OPTION,null , opcoes.toArray(), opcoes.toArray()[1]);
+                    JOptionPane.INFORMATION_MESSAGE,null , opcoes.toArray(), opcoes.toArray()[1]);
             if(fim != null){
                 double fluxoMaximo = Algoritmos.fluxoMaximo(grafo, selecionado, fim);
-                JOptionPane.showMessageDialog(this, "Fluxo Máximo: " + fluxoMaximo, "Fluxo Máximo", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(jList, "Fluxo Máximo: " + fluxoMaximo, "Fluxo Máximo", JOptionPane.INFORMATION_MESSAGE);
                 
             }else{
-                JOptionPane.showMessageDialog(this, "Erro!", "!@#$", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Selecione outro vértice!", "!@#$", JOptionPane.ERROR_MESSAGE);
             }
         }
     }//GEN-LAST:event_btFluxoMaximoActionPerformed
